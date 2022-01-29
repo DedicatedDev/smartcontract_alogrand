@@ -1,0 +1,14 @@
+filename: nft_clear_state.py
+timestamp: 1643416199
+compiled: BIEBQw==
+compiledHash: 5QWQ3DPBFLTOT64LVXBRL2SDL7ESJD2WTRURRGXK5GHPIOOJQCENC3AOUA
+srcHash: 3885548460
+base64ToBytes:
+  - 4
+  - 129
+  - 1
+  - 67
+tealCode: |
+  #pragma version 4
+  int 1
+  return

@@ -1,0 +1,343 @@
+filename: nft_approval.py
+timestamp: 1643416199
+compiled: BCADAQACJgIFdG90YWwHY3JlYXRvcjEYIxJAAKYxGYEEEkAAnDEZgQUSQACOMRkkEkAAhTEZIhJAAHw2GgCABmNyZWF0ZRJAADI2GgCACHRyYW5zZmVyEkAAAQAxGyQSMSAyAxIQIjYaAWIiEhBEIjYaAWgkNhoBImYiQzEbgQMSMQApZBIQMSAyAxIQRCgoZCIIZyhkFoACX2hQNQAoZBY2GgFnNAA2GgJnIyhkFiJmMQApZBJDIkMiQzEAKWQSQyNDKTEAZzEbIxJEKCNnIkM=
+compiledHash: NBJK444WKBGVE4GMRMGJWPVYG6H3DBFDSTU2IDJIRJUPNUEOHLF6DGVO5E
+srcHash: 2701791678
+base64ToBytes:
+  - 4
+  - 32
+  - 3
+  - 1
+  - 0
+  - 2
+  - 38
+  - 2
+  - 5
+  - 116
+  - 111
+  - 116
+  - 97
+  - 108
+  - 7
+  - 99
+  - 114
+  - 101
+  - 97
+  - 116
+  - 111
+  - 114
+  - 49
+  - 24
+  - 35
+  - 18
+  - 64
+  - 0
+  - 166
+  - 49
+  - 25
+  - 129
+  - 4
+  - 18
+  - 64
+  - 0
+  - 156
+  - 49
+  - 25
+  - 129
+  - 5
+  - 18
+  - 64
+  - 0
+  - 142
+  - 49
+  - 25
+  - 36
+  - 18
+  - 64
+  - 0
+  - 133
+  - 49
+  - 25
+  - 34
+  - 18
+  - 64
+  - 0
+  - 124
+  - 54
+  - 26
+  - 0
+  - 128
+  - 6
+  - 99
+  - 114
+  - 101
+  - 97
+  - 116
+  - 101
+  - 18
+  - 64
+  - 0
+  - 50
+  - 54
+  - 26
+  - 0
+  - 128
+  - 8
+  - 116
+  - 114
+  - 97
+  - 110
+  - 115
+  - 102
+  - 101
+  - 114
+  - 18
+  - 64
+  - 0
+  - 1
+  - 0
+  - 49
+  - 27
+  - 36
+  - 18
+  - 49
+  - 32
+  - 50
+  - 3
+  - 18
+  - 16
+  - 34
+  - 54
+  - 26
+  - 1
+  - 98
+  - 34
+  - 18
+  - 16
+  - 68
+  - 34
+  - 54
+  - 26
+  - 1
+  - 104
+  - 36
+  - 54
+  - 26
+  - 1
+  - 34
+  - 102
+  - 34
+  - 67
+  - 49
+  - 27
+  - 129
+  - 3
+  - 18
+  - 49
+  - 0
+  - 41
+  - 100
+  - 18
+  - 16
+  - 49
+  - 32
+  - 50
+  - 3
+  - 18
+  - 16
+  - 68
+  - 40
+  - 40
+  - 100
+  - 34
+  - 8
+  - 103
+  - 40
+  - 100
+  - 22
+  - 128
+  - 2
+  - 95
+  - 104
+  - 80
+  - 53
+  - 0
+  - 40
+  - 100
+  - 22
+  - 54
+  - 26
+  - 1
+  - 103
+  - 52
+  - 0
+  - 54
+  - 26
+  - 2
+  - 103
+  - 35
+  - 40
+  - 100
+  - 22
+  - 34
+  - 102
+  - 49
+  - 0
+  - 41
+  - 100
+  - 18
+  - 67
+  - 34
+  - 67
+  - 34
+  - 67
+  - 49
+  - 0
+  - 41
+  - 100
+  - 18
+  - 67
+  - 35
+  - 67
+  - 41
+  - 49
+  - 0
+  - 103
+  - 49
+  - 27
+  - 35
+  - 18
+  - 68
+  - 40
+  - 35
+  - 103
+  - 34
+  - 67
+tealCode: |
+  #pragma version 4
+  txn ApplicationID
+  int 0
+  ==
+  bnz main_l14
+  txn OnCompletion
+  int UpdateApplication
+  ==
+  bnz main_l13
+  txn OnCompletion
+  int DeleteApplication
+  ==
+  bnz main_l12
+  txn OnCompletion
+  int CloseOut
+  ==
+  bnz main_l11
+  txn OnCompletion
+  int OptIn
+  ==
+  bnz main_l10
+  txna ApplicationArgs 0
+  byte "create"
+  ==
+  bnz main_l9
+  txna ApplicationArgs 0
+  byte "transfer"
+  ==
+  bnz main_l8
+  err
+  main_l8:
+  txn NumAppArgs
+  int 2
+  ==
+  txn RekeyTo
+  global ZeroAddress
+  ==
+  &&
+  int 1
+  txna ApplicationArgs 1
+  app_local_get
+  int 1
+  ==
+  &&
+  assert
+  int 1
+  txna ApplicationArgs 1
+  app_local_del
+  int 2
+  txna ApplicationArgs 1
+  int 1
+  app_local_put
+  int 1
+  return
+  main_l9:
+  txn NumAppArgs
+  int 3
+  ==
+  txn Sender
+  byte "creator"
+  app_global_get
+  ==
+  &&
+  txn RekeyTo
+  global ZeroAddress
+  ==
+  &&
+  assert
+  byte "total"
+  byte "total"
+  app_global_get
+  int 1
+  +
+  app_global_put
+  byte "total"
+  app_global_get
+  itob
+  byte "_h"
+  concat
+  store 0
+  byte "total"
+  app_global_get
+  itob
+  txna ApplicationArgs 1
+  app_global_put
+  load 0
+  txna ApplicationArgs 2
+  app_global_put
+  int 0
+  byte "total"
+  app_global_get
+  itob
+  int 1
+  app_local_put
+  txn Sender
+  byte "creator"
+  app_global_get
+  ==
+  return
+  main_l10:
+  int 1
+  return
+  main_l11:
+  int 1
+  return
+  main_l12:
+  txn Sender
+  byte "creator"
+  app_global_get
+  ==
+  return
+  main_l13:
+  int 0
+  return
+  main_l14:
+  byte "creator"
+  txn Sender
+  app_global_put
+  txn NumAppArgs
+  int 0
+  ==
+  assert
+  byte "total"
+  int 0
+  app_global_put
+  int 1
+  return
