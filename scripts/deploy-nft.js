@@ -27,6 +27,7 @@ async function run (runtimeEnv, deployer) {
     localInts: 16,
     globalInts: 1,
     globalBytes: 63
+    
   }, {});
 
   const appInfo = await deployer.getApp('nft_approval.py', 'nft_clear_state.py');
